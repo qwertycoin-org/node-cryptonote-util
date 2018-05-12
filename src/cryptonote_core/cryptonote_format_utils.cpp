@@ -734,7 +734,12 @@ namespace cryptonote
   //---------------------------------------------------------------
   bool get_block_longhash(const block& b, crypto::hash& res, uint64_t height)
   {
-    b.major_version < BLOCK_MAJOR_VERSION_4 ? cn_pow_hash_v1 ctx : cn_pow_hash_v2 ctx;
+    if (b.major_version < BLOCK_MAJOR_VERSION_4) {
+        cn_pow_hash_v1 ctx;
+    }
+    else {
+        cn_pow_hash_v2 ctx;
+    }
 	blobdata bd;
     if(!get_block_hashing_blob(b, bd))
       return false;
@@ -771,7 +776,12 @@ namespace cryptonote
   //---------------------------------------------------------------
   bool get_bytecoin_block_longhash(const block& b, crypto::hash& res)
   {
-	b.major_version < BLOCK_MAJOR_VERSION_4 ? cn_pow_hash_v1 ctx : cn_pow_hash_v2 ctx;
+    if (b.major_version < BLOCK_MAJOR_VERSION_4) {
+        cn_pow_hash_v1 ctx;
+    }
+    else {
+        cn_pow_hash_v2 ctx;
+    }
 	blobdata bd;
     if(!get_bytecoin_block_hashing_blob(b, bd))
       return false;
