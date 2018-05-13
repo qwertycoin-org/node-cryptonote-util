@@ -738,7 +738,7 @@ namespace cryptonote
     if(!get_block_hashing_blob(b, bd))
       return false;
 	cn_pow_hash_v2 ctx;
-	if (BLOCK_MINOR_VERSION_1 <= b.minor_version)
+	if (BLOCK_MAJOR_VERSION_4 <= b.major_version)
 	{
 		ctx.hash(bd.data(), bd.size(), res.data);
 	}
@@ -782,7 +782,7 @@ namespace cryptonote
     if(!get_bytecoin_block_hashing_blob(b, bd))
       return false;
 	cn_pow_hash_v2 ctx;
-	if (BLOCK_MINOR_VERSION_1 <= b.minor_version)
+	if (BLOCK_MAJOR_VERSION_4 <= b.major_version)
 	{
 		ctx.hash(bd.data(), bd.size(), res.data);
 	}
