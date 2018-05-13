@@ -738,14 +738,14 @@ namespace cryptonote
     if(!get_block_hashing_blob(b, bd))
       return false;
 	cn_pow_hash_v2 ctx;
-	if (b.minor_version >= BLOCK_MINOR_VERSION_1)
+	/*if (b.minor_version >= BLOCK_MINOR_VERSION_1)
 	{
 		ctx.hash(bd.data(), bd.size(), res.data);
 	}
-	else {
+	else {*/
 		cn_pow_hash_v1 ctx_v1 = cn_pow_hash_v1::make_borrowed(ctx);
 		ctx_v1.hash(bd.data(), bd.size(), res.data);
-	}
+	//}
     return true;
   }
   //---------------------------------------------------------------
@@ -782,14 +782,14 @@ namespace cryptonote
     if(!get_bytecoin_block_hashing_blob(b, bd))
       return false;
 	cn_pow_hash_v2 ctx;
-	if (b.minor_version >= BLOCK_MINOR_VERSION_1)
+	/*if (b.minor_version >= BLOCK_MINOR_VERSION_1)
 	{
 		ctx.hash(bd.data(), bd.size(), res.data);
 	}
-	else {
+	else {*/
 		cn_pow_hash_v1 ctx_v1 = cn_pow_hash_v1::make_borrowed(ctx);
 		ctx_v1.hash(bd.data(), bd.size(), res.data);
-	}
+	//}
     return true;
   }
   //---------------------------------------------------------------
