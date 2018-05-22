@@ -14,7 +14,7 @@
 #define BLOCK_MINOR_VERSION_1                           1
 
 
-#define COIN                                            (uint64_t)(-1)		// pow(10, 8)
+#define COIN                                            (uint64_t)(-1)		//
 #define DEFAULT_FEE                                     uint64_t(100000000) // 1 QWC
 
 

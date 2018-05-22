@@ -11,7 +11,6 @@
                 "src/crypto/crypto-ops-data.c",
                 "src/crypto/hash.c",
                 "src/crypto/keccak.c",
-                "src/crypto/keccak.c",
 				"src/crypto/cn_slow_hash_hard_intel.cpp",
                 "src/crypto/cn_slow_hash_soft.cpp",
                 "src/crypto/cn_slow_hash.hpp",
