@@ -11,6 +11,7 @@ using namespace epee;
 #include "miner.h"
 #include "crypto/crypto.h"
 #include "crypto/hash.h"
+#include "../crypto/cn_slow_hash.hpp"
 #include "serialization/binary_utils.h"
 
 namespace cryptonote
@@ -736,7 +737,13 @@ namespace cryptonote
     blobdata bd;
     if(!get_block_hashing_blob(b, bd))
       return false;
-    crypto::cn_slow_hash(bd.data(), bd.size(), res);
+    cn_pow_hash_v2 ctx;
+    if (b.major_version < BLOCK_MAJOR_VERSION_4) {
+     cn_pow_hash_v1 ctx_v1 = cn_pow_hash_v1::make_borrowed(ctx);
+     ctx_v1.hash(bd.data(), bd.size(), res.data);
+    } else {
+     ctx.hash(bd.data(), bd.size(), res.data);
+    }
     return true;
   }
   //---------------------------------------------------------------
@@ -772,7 +779,13 @@ namespace cryptonote
     blobdata bd;
     if(!get_bytecoin_block_hashing_blob(b, bd))
       return false;
-    crypto::cn_slow_hash(bd.data(), bd.size(), res);
+    cn_pow_hash_v2 ctx;
+    if (b.major_version < BLOCK_MAJOR_VERSION_4) {
+      cn_pow_hash_v1 ctx_v1 = cn_pow_hash_v1::make_borrowed(ctx);
+      ctx_v1.hash(bd.data(), bd.size(), res.data);
+    } else {
+      ctx.hash(bd.data(), bd.size(), res.data);
+    }
     return true;
   }
   //---------------------------------------------------------------
@@ -902,7 +915,7 @@ namespace cryptonote
     case BLOCK_MAJOR_VERSION_2: return check_proof_of_work_v2(bl, current_diffic, proof_of_work);
     case BLOCK_MAJOR_VERSION_3: return check_proof_of_work_v2(bl, current_diffic, proof_of_work);
     case BLOCK_MAJOR_VERSION_4: return check_proof_of_work_v1(bl, current_diffic, proof_of_work);
-    case BLOCK_MAJOR_VERSION_5: return check_proof_of_work_v2(bl, current_diffic, proof_of_work);
+    case BLOCK_MAJOR_VERSION_5: return check_proof_of_work_v1(bl, current_diffic, proof_of_work);
     }
 
     CHECK_AND_ASSERT_MES(false, false, "unknown block major version: " << bl.major_version << "." << bl.minor_version);

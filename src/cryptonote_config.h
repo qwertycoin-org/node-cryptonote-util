@@ -11,9 +11,9 @@
 #define BLOCK_MAJOR_VERSION_4                           4
 #define BLOCK_MAJOR_VERSION_5                           5
 
-#define COIN                                            ((uint64_t)100000000) // pow(10, 8)
-#define DEFAULT_FEE                                     ((uint64_t)1000000) // pow(10, 6)
+#define COIN                                            (uint64_t)(-1) //
+#define DEFAULT_FEE                                     ((uint64_t)100000000) // 1 QWC
 
 
 #define CRYPTONOTE_MINED_MONEY_UNLOCK_WINDOW            60
-#define CRYPTONOTE_DISPLAY_DECIMAL_POINT                12
+#define CRYPTONOTE_DISPLAY_DECIMAL_POINT                8
